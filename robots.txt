@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tjq8288.github.io/compound-calculator/sitemap.xml
