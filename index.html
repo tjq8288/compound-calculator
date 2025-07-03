@@ -1629,6 +1629,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 .replace('{deposit}', formatCurrency(requiredMonthly, currentLang));
         }
 
+        // Google Analytics 이벤트 추적
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'calculate_compound_interest', {
+                'event_category': 'calculator_usage',
+                'event_label': currentTab,
+                'custom_parameters': {
+                    'language': currentLang,
+                    'calculation_type': currentTab,
+                    'investment_period_years': years,
+                    'annual_rate': rate
+                },
+                'value': 1
+            });
+    
+            // 언어별 사용량 추적
+            gtag('event', 'language_usage', {
+                'event_category': 'user_behavior',
+                'event_label': currentLang,
+                'value': 1
+            });
+    
+            // 탭별 사용량 추적
+            gtag('event', 'tab_usage', {
+                'event_category': 'user_behavior',
+                'event_label': currentTab,
+                'value': 1
+            });
+        }
+
         renderResults(result, t);
         document.getElementById('explanationText').textContent = explanation;
         drawChart(result, years, t);
